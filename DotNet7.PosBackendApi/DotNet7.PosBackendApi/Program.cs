@@ -1,4 +1,6 @@
-using DotNet7.PosBackendApi.DbService.Models;
+using DotNet7.PosBackendApi.DbService.DbModels;
+using DotNet7.PosBackendApi.Features.Setup.Customer;
+using DotNet7.PosBackendApi.Features.Setup.Staff;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,10 +12,17 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+
+
 builder.Services.AddDbContext<AppDbContext>(opt =>
 {
     opt.UseSqlServer(builder.Configuration.GetConnectionString("DbConnection"));
 });
+
+
+builder.Services.AddScoped<StaffService, StaffService>();
+
+builder.Services.AddScoped<CustomerService, CustomerService>();
 
 var app = builder.Build();
 

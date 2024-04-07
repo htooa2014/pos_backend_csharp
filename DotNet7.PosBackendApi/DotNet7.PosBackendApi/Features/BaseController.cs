@@ -7,6 +7,7 @@ namespace DotNet7.PosBackendApi.Features
     [ApiController]
     public class BaseController : ControllerBase
     {
+        [NonAction]
         public IActionResult InternalServerError(Exception ex)
         {
             return StatusCode(500, new
